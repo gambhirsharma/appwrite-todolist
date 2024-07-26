@@ -3,6 +3,7 @@ import { autoGrow, bodyParser, setNewOffset, setZIndex } from "../utils";
 import { db } from "../appwrite/databases";
 import Spinner from "../icons/Spinner";
 import DeleteButton from "./DeleteButton";
+import { NoteContext } from "../context/NoteContext";
 
 interface note {
   $id: number;
@@ -19,6 +20,8 @@ function NoteCard({ note }: { note: note }) {
   const [saving, setSaving] = React.useState(false)
   const textAreaRef = React.useRef<HTMLTextAreaElement>(null);
   const keyUpTimer = React.useRef(null)
+
+  const { setSelectedNote } = React.useContext(NoteContext);
 
   const handleKeyUp = async () => {
     //1 - Initiate "saving" state
@@ -56,6 +59,7 @@ function NoteCard({ note }: { note: note }) {
   const mouseDown = (e) => {
     if (e.target.className === "card-header") {
       setZIndex(cardRef.current);
+      setSelectedNote(note)
       mouseStartPos.x = e.clientX;
       mouseStartPos.y = e.clientY;
 
@@ -106,7 +110,7 @@ function NoteCard({ note }: { note: note }) {
         style={{ backgroundColor: colors.colorHeader }}
         onMouseDown={mouseDown}
       >
-        <DeleteButton noteId={note.$id}  />
+        <DeleteButton noteId={note.$id} />
         {saving && (
           <div className="card-saving">
             <Spinner color={colors.colorText} />
@@ -123,6 +127,7 @@ function NoteCard({ note }: { note: note }) {
           ref={textAreaRef}
           onFocus={() => {
             setZIndex(cardRef.current);
+            setSelectedNote(note)
           }}
           onInput={() => {
             autoGrow(textAreaRef);

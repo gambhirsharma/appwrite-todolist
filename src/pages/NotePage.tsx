@@ -1,6 +1,7 @@
 import React from "react"
 import {NoteContext} from "../context/NoteContext"
 import NoteCard from "../components/NoteCard";
+import Controls from "../components/Controls";
 
 
 function NotePage() {
@@ -20,7 +21,9 @@ function NotePage() {
       notes.map((note) => (
         <NoteCard key={note.$id} note={note} />
       ))
-    }</div>
+    }
+      <Controls/>
+      </div>
   )
 }
 
