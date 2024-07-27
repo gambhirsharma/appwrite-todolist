@@ -9,7 +9,7 @@
 
 ##### Deployment steps: 
 
-Follow this [Blog](https://quicktuts.online/blog/deploying-bun-app-ec2-nginx)
+Follow this [Blog](https://quicktuts.online/blog/deploying-bun-app-ec2-nginx) | [Video](https://www.youtube.com/watch?v=7rlLkgMsExc)
 
 **Nginx part:**
 
